@@ -75,6 +75,10 @@ npx cc-health-check
 
 Useful for CI: `npx cc-health-check || echo "Setup needs work"`
 
+## Companion tool
+
+**[cc-session-stats](https://github.com/yurukusa/cc-session-stats)** — See how much time you actually spend with Claude Code. Session durations, daily patterns, health warnings.
+
 ## Also available
 
 **[Web version](https://yurukusa.github.io/cc-health-check/)** — Interactive 20-question checklist with the same scoring.

@@ -86,12 +86,29 @@ Generates a shields.io badge URL for your README:
 
 ![Claude Code Health](https://img.shields.io/badge/Claude%20Code%20Health-95%25%20%E2%80%94%20Production%20Ready-brightgreen)
 
-## Exit codes
+## CI integration
 
-- `0` — Score >= 60 (passing)
-- `1` — Score < 60 (failing)
+Exit code `0` if score >= 60, `1` otherwise.
 
-Useful for CI: `npx cc-health-check || echo "Setup needs work"`
+```yaml
+# .github/workflows/health-check.yml
+name: Claude Code Health Check
+on:
+  push:
+    paths: ['.claude/**', 'CLAUDE.md']
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npx cc-health-check@latest
+```
+
+Or save a JSON report as artifact:
+
+```bash
+npx cc-health-check --json > health-report.json
+```
 
 ## The cc-toolkit trilogy
 

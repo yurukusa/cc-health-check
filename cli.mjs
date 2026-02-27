@@ -439,12 +439,38 @@ const checks = [
 ];
 
 // ─── Run all checks ───
-function run() {
+function runChecks() {
   const totalPts = checks.reduce((s, ch) => s + ch.w, 0);
   let earned = 0;
   const results = [];
   const dimScores = {};
   const dimTotals = {};
+
+  for (const ch of checks) {
+    if (!dimScores[ch.cat]) {
+      dimScores[ch.cat] = 0;
+      dimTotals[ch.cat] = 0;
+    }
+    dimTotals[ch.cat] += ch.w;
+    const result = ch.test();
+    const pts = result.pass ? ch.w : 0;
+    earned += pts;
+    dimScores[ch.cat] += pts;
+    results.push({ cat: ch.cat, q: ch.q, w: ch.w, fix: ch.fix, result, pts });
+  }
+
+  const pct = Math.round((earned / totalPts) * 100);
+  let grade;
+  if (pct >= 80) grade = 'Production Ready';
+  else if (pct >= 60) grade = 'Getting There';
+  else if (pct >= 35) grade = 'Needs Work';
+  else grade = 'Critical';
+
+  return { results, dimScores, dimTotals, earned, totalPts, pct, grade };
+}
+
+function printHuman(data) {
+  const { results, dimScores, dimTotals, earned, totalPts, pct, grade } = data;
 
   console.log('');
   console.log(`${c.bold}${c.cyan}  Claude Code Health Check v1.0${c.reset}`);
@@ -453,39 +479,22 @@ function run() {
   console.log('');
 
   let currentCat = '';
-
-  for (const ch of checks) {
-    if (ch.cat !== currentCat) {
-      currentCat = ch.cat;
-      if (!dimScores[ch.cat]) {
-        dimScores[ch.cat] = 0;
-        dimTotals[ch.cat] = 0;
-      }
-      console.log(`  ${c.bold}${c.magenta}▸ ${ch.cat}${c.reset}`);
+  for (const r of results) {
+    if (r.cat !== currentCat) {
+      currentCat = r.cat;
+      console.log(`  ${c.bold}${c.magenta}▸ ${r.cat}${c.reset}`);
     }
-
-    dimTotals[ch.cat] += ch.w;
-    const result = ch.test();
-    const icon = result.pass ? PASS : FAIL;
-    const pts = result.pass ? ch.w : 0;
-    earned += pts;
-    dimScores[ch.cat] += pts;
-
-    console.log(`    ${icon} ${ch.q}`);
-    if (!result.pass) {
-      console.log(`         ${c.dim}${result.detail}${c.reset}`);
+    const icon = r.result.pass ? PASS : FAIL;
+    console.log(`    ${icon} ${r.q}`);
+    if (!r.result.pass) {
+      console.log(`         ${c.dim}${r.result.detail}${c.reset}`);
     }
-
-    results.push({ ...ch, result, pts });
   }
 
-  // ─── Score Summary ───
-  const pct = Math.round((earned / totalPts) * 100);
-  let grade, gradeColor;
-  if (pct >= 80) { grade = 'Production Ready'; gradeColor = c.green; }
-  else if (pct >= 60) { grade = 'Getting There'; gradeColor = c.yellow; }
-  else if (pct >= 35) { grade = 'Needs Work'; gradeColor = c.red; }
-  else { grade = 'Critical'; gradeColor = `${c.bold}${c.red}`; }
+  let gradeColor;
+  if (pct >= 80) gradeColor = c.green;
+  else if (pct >= 60) gradeColor = c.yellow;
+  else gradeColor = c.red;
 
   console.log('');
   console.log(`  ${c.dim}───────────────────────────────────────${c.reset}`);
@@ -493,7 +502,6 @@ function run() {
   console.log(`  ${c.dim}(${earned}/${totalPts} points)${c.reset}`);
   console.log('');
 
-  // ─── Dimension Breakdown ───
   console.log(`  ${c.bold}Dimensions:${c.reset}`);
   for (const [cat, total] of Object.entries(dimTotals)) {
     const score = dimScores[cat];
@@ -501,16 +509,13 @@ function run() {
     const barLen = 20;
     const filled = Math.round((dimPct / 100) * barLen);
     let barColor = c.green;
+    if (dimPct < 60) barColor = c.yellow;
     if (dimPct < 34) barColor = c.red;
-    else if (dimPct < 60) barColor = c.yellow;
-    else if (dimPct < 80) barColor = c.yellow;
-
     const bar = barColor + '█'.repeat(filled) + c.dim + '░'.repeat(barLen - filled) + c.reset;
     console.log(`    ${bar} ${cat} ${dimPct}%`);
   }
   console.log('');
 
-  // ─── Top Recommendations ───
   const failures = results.filter(r => !r.result.pass).sort((a, b) => b.w - a.w);
   if (failures.length > 0) {
     console.log(`  ${c.bold}Top fixes:${c.reset}`);
@@ -526,16 +531,50 @@ function run() {
   }
 
   console.log('');
-
-  // ─── Shareable one-liner ───
   const dims = Object.entries(dimTotals).map(([cat, total]) => {
-    const pct = Math.round((dimScores[cat] / total) * 100);
-    return `${cat}: ${pct}%`;
+    const dimPct = Math.round((dimScores[cat] / total) * 100);
+    return `${cat}: ${dimPct}%`;
   }).join(' | ');
   console.log(`  ${c.dim}Share: "My Claude Code Health Score: ${pct}/100 (${dims})" #ClaudeCode${c.reset}`);
   console.log('');
-
-  process.exit(pct >= 60 ? 0 : 1);
 }
 
-run();
+function printJSON(data) {
+  const { results, dimScores, dimTotals, earned, totalPts, pct, grade } = data;
+  const output = {
+    version: '1.0',
+    score: pct,
+    grade,
+    points: { earned, total: totalPts },
+    dimensions: {},
+    checks: [],
+  };
+  for (const [cat, total] of Object.entries(dimTotals)) {
+    output.dimensions[cat] = {
+      score: dimScores[cat],
+      total,
+      percent: Math.round((dimScores[cat] / total) * 100),
+    };
+  }
+  for (const r of results) {
+    output.checks.push({
+      dimension: r.cat,
+      check: r.q,
+      pass: r.result.pass,
+      detail: r.result.detail,
+      weight: r.w,
+      fix: r.result.pass ? undefined : r.fix,
+    });
+  }
+  console.log(JSON.stringify(output, null, 2));
+}
+
+// ─── Main ───
+const jsonMode = process.argv.includes('--json');
+const data = runChecks();
+if (jsonMode) {
+  printJSON(data);
+} else {
+  printHuman(data);
+}
+process.exit(data.pct >= 60 ? 0 : 1);

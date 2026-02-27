@@ -68,6 +68,14 @@ npx cc-health-check
 | 35-59 | Needs Work |
 | 0-34 | Critical |
 
+## JSON output
+
+```bash
+npx cc-health-check --json
+```
+
+Returns structured JSON with score, grade, dimensions, and per-check results. Useful for CI pipelines, dashboards, or programmatic analysis.
+
 ## Exit codes
 
 - `0` — Score >= 60 (passing)

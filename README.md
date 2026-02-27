@@ -119,6 +119,7 @@ npx cc-health-check --json > health-report.json
 | [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 | [cc-cost-check](https://github.com/yurukusa/cc-cost-check) | Cost per commit calculator |
 | [cc-wrapped](https://yurukusa.github.io/cc-wrapped/) | Your AI year in review (Spotify Wrapped style) |
+| [cc-roast](https://yurukusa.github.io/cc-roast/) | Your CLAUDE.md, brutally honest |
 
 ## Also available
 

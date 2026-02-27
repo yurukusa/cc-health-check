@@ -75,9 +75,13 @@ npx cc-health-check
 
 Useful for CI: `npx cc-health-check || echo "Setup needs work"`
 
-## Companion tool
+## The cc-toolkit trilogy
 
-**[cc-session-stats](https://github.com/yurukusa/cc-session-stats)** — See how much time you actually spend with Claude Code. Session durations, daily patterns, health warnings.
+| Tool | What it checks |
+|------|---------------|
+| **cc-health-check** | Is your AI **setup** safe? |
+| [cc-session-stats](https://github.com/yurukusa/cc-session-stats) | How much are you **using** AI? |
+| [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 
 ## Also available
 

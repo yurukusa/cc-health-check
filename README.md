@@ -45,7 +45,7 @@ npx cc-health-check
     → Add a PreToolUse hook that blocks destructive commands.
     → Scan bash output for error patterns in PostToolUse hooks.
 
-  Production hooks for autonomous Claude Code:
+  Production hooks + templates for autonomous Claude Code:
   https://yurukusa.gumroad.com/l/cc-codex-ops-kit
 ```
 

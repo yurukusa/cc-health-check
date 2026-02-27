@@ -455,6 +455,17 @@
       <ul class="rec-list" id="recList"></ul>
     </div>
 
+    <div class="card fade-up" id="shareCard" style="text-align:center;">
+      <div class="card-label">Share Your Score</div>
+      <canvas id="shareCanvas" width="600" height="315" style="display:none;"></canvas>
+      <div id="sharePreview" style="margin-bottom:16px;"></div>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="share-btn" id="btnTwitter" style="background:#1da1f2; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer; font-size:0.9rem;">Share on X / Twitter</button>
+        <button class="share-btn" id="btnCopy" style="background:var(--bg-hover); color:var(--text); border:1px solid var(--border); padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer; font-size:0.9rem;">Copy Text</button>
+        <button class="share-btn" id="btnDownload" style="background:var(--bg-hover); color:var(--text); border:1px solid var(--border); padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer; font-size:0.9rem;">Download Card</button>
+      </div>
+    </div>
+
     <div class="cta-card fade-up" id="ctaCard">
       <h3>Production hooks + templates for autonomous Claude Code</h3>
       <p>10 hooks + 5 templates covering 18/20 checks. From 1000+ hours of autonomous operation.</p>
@@ -778,10 +789,123 @@ function showResults() {
     document.getElementById('ctaCard').style.display = 'none';
   }
 
+  // Generate share card
+  generateShareCard(pct, grade.textContent, dimScores, dimTotals, catNames);
+
   // Show results
   document.getElementById('results').style.display = 'block';
   document.getElementById('btnScan').style.display = 'none';
   document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function generateShareCard(pct, gradeText, dimScores, dimTotals, catNames) {
+  const canvas = document.getElementById('shareCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#0f1419';
+  ctx.fillRect(0, 0, 600, 315);
+
+  // Accent line
+  let accentColor = '#00ba7c';
+  if (pct < 35) accentColor = '#f4212e';
+  else if (pct < 60) accentColor = '#ff6b35';
+  else if (pct < 80) accentColor = '#ffd166';
+  ctx.fillStyle = accentColor;
+  ctx.fillRect(0, 0, 600, 4);
+
+  // Title
+  ctx.fillStyle = '#71767b';
+  ctx.font = '14px -apple-system, sans-serif';
+  ctx.fillText('Claude Code Health Check', 32, 40);
+
+  // Score
+  ctx.fillStyle = accentColor;
+  ctx.font = 'bold 64px -apple-system, sans-serif';
+  ctx.fillText(`${pct}`, 32, 110);
+
+  const scoreWidth = ctx.measureText(`${pct}`).width;
+  ctx.fillStyle = '#71767b';
+  ctx.font = '24px -apple-system, sans-serif';
+  ctx.fillText('/ 100', 32 + scoreWidth + 8, 110);
+
+  // Grade
+  ctx.fillStyle = accentColor;
+  ctx.font = 'bold 20px -apple-system, sans-serif';
+  ctx.fillText(gradeText, 32, 142);
+
+  // Dimension bars
+  const cats = Object.keys(dimTotals);
+  const barStartY = 170;
+  const barHeight = 12;
+  const barMaxWidth = 180;
+  const gap = 22;
+
+  cats.forEach((cat, i) => {
+    const dimPct = Math.round((dimScores[cat] / dimTotals[cat]) * 100);
+    const y = barStartY + i * gap;
+
+    // Label
+    ctx.fillStyle = '#e7e9ea';
+    ctx.font = '12px -apple-system, sans-serif';
+    ctx.fillText(catNames[cat], 32, y);
+
+    // Bar background
+    ctx.fillStyle = '#1a2332';
+    ctx.fillRect(160, y - 10, barMaxWidth, barHeight);
+
+    // Bar fill
+    let barColor = '#00ba7c';
+    if (dimPct < 34) barColor = '#f4212e';
+    else if (dimPct < 60) barColor = '#ff6b35';
+    else if (dimPct < 80) barColor = '#ffd166';
+    ctx.fillStyle = barColor;
+    ctx.fillRect(160, y - 10, (dimPct / 100) * barMaxWidth, barHeight);
+
+    // Percentage
+    ctx.fillStyle = '#71767b';
+    ctx.font = '12px -apple-system, sans-serif';
+    ctx.fillText(`${dimPct}%`, 350, y);
+  });
+
+  // URL
+  ctx.fillStyle = '#1da1f2';
+  ctx.font = '13px -apple-system, sans-serif';
+  ctx.fillText('yurukusa.github.io/cc-health-check', 32, 300);
+
+  // Show preview
+  const preview = document.getElementById('sharePreview');
+  const img = canvas.toDataURL('image/png');
+  preview.innerHTML = `<img src="${img}" style="max-width:100%; border-radius:8px; border:1px solid var(--border);" alt="Health Check Score Card" />`;
+
+  // Share text
+  const dims = cats.map(cat => {
+    const dimPct = Math.round((dimScores[cat] / dimTotals[cat]) * 100);
+    return `${catNames[cat]}: ${dimPct}%`;
+  }).join(' | ');
+  const shareText = `My Claude Code Health Score: ${pct}/100 — ${gradeText}\n\n${dims}\n\nhttps://yurukusa.github.io/cc-health-check/ #ClaudeCode`;
+
+  // Twitter button
+  document.getElementById('btnTwitter').onclick = () => {
+    const url = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+    window.open(url, '_blank', 'width=600,height=400');
+  };
+
+  // Copy button
+  document.getElementById('btnCopy').onclick = () => {
+    navigator.clipboard.writeText(shareText).then(() => {
+      document.getElementById('btnCopy').textContent = 'Copied!';
+      setTimeout(() => { document.getElementById('btnCopy').textContent = 'Copy Text'; }, 2000);
+    });
+  };
+
+  // Download button
+  document.getElementById('btnDownload').onclick = () => {
+    const a = document.createElement('a');
+    a.href = img;
+    a.download = `claude-code-health-${pct}.png`;
+    a.click();
+  };
 }
 
 function resetCheck() {

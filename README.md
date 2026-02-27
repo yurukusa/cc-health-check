@@ -76,6 +76,16 @@ npx cc-health-check --json
 
 Returns structured JSON with score, grade, dimensions, and per-check results. Useful for CI pipelines, dashboards, or programmatic analysis.
 
+## README badge
+
+```bash
+npx cc-health-check --badge
+```
+
+Generates a shields.io badge URL for your README:
+
+![Claude Code Health](https://img.shields.io/badge/Claude%20Code%20Health-95%25%20%E2%80%94%20Production%20Ready-brightgreen)
+
 ## Exit codes
 
 - `0` — Score >= 60 (passing)

@@ -569,11 +569,28 @@ function printJSON(data) {
   console.log(JSON.stringify(output, null, 2));
 }
 
+function printBadge(data) {
+  const { pct, grade } = data;
+  let color = 'brightgreen';
+  if (pct < 80) color = 'yellow';
+  if (pct < 60) color = 'orange';
+  if (pct < 35) color = 'red';
+  const label = encodeURIComponent('Claude Code Health');
+  const msg = encodeURIComponent(`${pct}% — ${grade}`);
+  const url = `https://img.shields.io/badge/${label}-${msg}-${color}`;
+  console.log(url);
+  console.log('');
+  console.log(`Markdown: ![Claude Code Health](${url})`);
+}
+
 // ─── Main ───
 const jsonMode = process.argv.includes('--json');
+const badgeMode = process.argv.includes('--badge');
 const data = runChecks();
 if (jsonMode) {
   printJSON(data);
+} else if (badgeMode) {
+  printBadge(data);
 } else {
   printHuman(data);
 }

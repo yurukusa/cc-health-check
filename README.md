@@ -118,6 +118,7 @@ npx cc-health-check --json > health-report.json
 | [cc-session-stats](https://github.com/yurukusa/cc-session-stats) | How much are you **using** AI? |
 | [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 | [cc-cost-check](https://github.com/yurukusa/cc-cost-check) | Cost per commit calculator |
+| [cc-wrapped](https://yurukusa.github.io/cc-wrapped/) | Your AI year in review (Spotify Wrapped style) |
 
 ## Also available
 

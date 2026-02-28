@@ -1,10 +1,38 @@
 # cc-health-check
 
-CLI diagnostic for your Claude Code setup. 20 automated checks across 6 dimensions.
+> **Is your Claude Code setup actually production-ready?**
+>
+> 108 hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
 
 ```
 npx cc-health-check
 ```
+
+**No installation required. Nothing leaves your machine.**
+
+---
+
+## Why this exists
+
+Claude Code can run autonomously for hours. But most setups aren't built for that. Files get deleted. Costs spike. The AI loops on errors. Push-to-main happens without review.
+
+These aren't hypothetical. They're what actually happens without the right guardrails.
+
+cc-health-check scans your `.claude/settings.json` and `CLAUDE.md` for 20 known failure patterns, gives you a score, and tells you exactly what to fix.
+
+---
+
+## Quick start (no install)
+
+**Web version** — paste in your CLAUDE.md, get your score instantly:
+👉 https://yurukusa.github.io/cc-health-check/
+
+**CLI** — scans your local setup automatically:
+```bash
+npx cc-health-check
+```
+
+---
 
 ## What it checks
 
@@ -29,25 +57,37 @@ npx cc-health-check
     [FAIL] Setup prevents pushing to main/master without review
     [PASS] Error-aware gate blocks external calls when errors exist
 
-  ▸ Code Quality
-    [PASS] Syntax checks run after every file edit
-    [FAIL] Error detection and tracking from command output
-    ...
-
   Score: 63/100 — Getting There
-
-  Dimensions:
-    ███████████░░░░░░░░░ Safety Guards 55%
-    ██████████░░░░░░░░░░ Code Quality 50%
-    ...
 
   Top fixes:
     → Add a PreToolUse hook that blocks destructive commands.
     → Scan bash output for error patterns in PostToolUse hooks.
-
-  Production hooks + templates for autonomous Claude Code:
-  https://yurukusa.gumroad.com/l/cc-codex-ops-kit
 ```
+
+## Scores
+
+| Score | Grade |
+|-------|-------|
+| 80-100 | Production Ready |
+| 60-79 | Getting There |
+| 35-59 | Needs Work |
+| 0-34 | Critical |
+
+---
+
+## Got a low score?
+
+**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 108 hours of real autonomous operation.
+
+```bash
+# See what you're missing
+npx cc-health-check
+
+# Fix it
+git clone https://github.com/yurukusa/claude-code-hooks
+```
+
+---
 
 ## How it works
 
@@ -58,15 +98,6 @@ npx cc-health-check
 5. Outputs actionable recommendations sorted by impact
 
 **Zero dependencies. No data sent anywhere. Runs entirely local.**
-
-## Scores
-
-| Score | Grade |
-|-------|-------|
-| 80-100 | Production Ready |
-| 60-79 | Getting There |
-| 35-59 | Needs Work |
-| 0-34 | Critical |
 
 ## JSON output
 
@@ -104,27 +135,19 @@ jobs:
       - run: npx cc-health-check@latest
 ```
 
-Or save a JSON report as artifact:
+---
 
-```bash
-npx cc-health-check --json > health-report.json
-```
+## The cc-toolkit
 
-## The cc-toolkit trilogy
-
-| Tool | What it checks |
-|------|---------------|
-| **cc-health-check** | Is your AI **setup** safe? |
+| Tool | What it does |
+|------|--------------|
+| **cc-health-check** | Is your AI **setup** safe? (you are here) |
+| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | Fix your score — 10 hooks + 5 templates |
 | [cc-session-stats](https://github.com/yurukusa/cc-session-stats) | How much are you **using** AI? |
 | [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 | [cc-cost-check](https://github.com/yurukusa/cc-cost-check) | Cost per commit calculator |
-| [cc-wrapped](https://yurukusa.github.io/cc-wrapped/) | Your AI year in review (Spotify Wrapped style) |
+| [cc-wrapped](https://yurukusa.github.io/cc-wrapped/) | Your AI year in review |
 | [cc-roast](https://yurukusa.github.io/cc-roast/) | Your CLAUDE.md, brutally honest |
-| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | Fix your score — 10 hooks + 5 templates |
-
-## Also available
-
-**[Web version](https://yurukusa.github.io/cc-health-check/)** — Interactive 20-question checklist with the same scoring.
 
 ## License
 

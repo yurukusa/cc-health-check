@@ -309,6 +309,8 @@
     }
     .rec-tag.diy { background: rgba(0,186,124,.15); color: var(--safe); }
     .rec-tag.kit { background: rgba(29,161,242,.15); color: var(--accent); }
+    .rec-hook-link { display: inline-block; font-size: .75rem; color: var(--text-muted); margin-top: 6px; text-decoration: none; transition: color .15s; }
+    .rec-hook-link:hover { color: var(--accent); }
 
     .cta-card {
       background: linear-gradient(135deg, rgba(29,161,242,.08), rgba(0,186,124,.06));
@@ -468,7 +470,7 @@
 
     <div class="cta-card fade-up" id="ctaCard">
       <h3>Production hooks + templates for autonomous Claude Code</h3>
-      <p>10 hooks + 5 templates covering 18/20 checks. From 1000+ hours of autonomous operation.</p>
+      <p>10 hooks + 5 templates covering 18/20 checks. From 108 hours of real autonomous operation.</p>
       <a href="https://yurukusa.gumroad.com/l/cc-codex-ops-kit?utm_source=health-check&utm_medium=tool&utm_campaign=cta" class="btn-cta" target="_blank" rel="noopener">
         Get CC-Codex Ops Kit
         <span class="btn-sub">$29 on Gumroad &middot; instant download</span>
@@ -495,25 +497,25 @@ const QUESTIONS = [
     catDesc: "Preventing destructive operations",
     q: "Do you have a PreToolUse hook that blocks dangerous commands (rm -rf, git reset --hard)?",
     w: 5,
-    rec: { pri: "high", title: "Add a PreToolUse safety hook", desc: "Block destructive bash commands before they execute. A single hook script can catch rm -rf, force push, and database drops.", diy: "Write a shell script that checks tool_input.command against a blocklist", kit: "Included: pre-tool-guard.sh with 15+ patterns" }
+    rec: { pri: "high", title: "Add a PreToolUse safety hook", desc: "Block destructive bash commands before they execute. A single hook script can catch rm -rf, force push, and database drops.", diy: "Write a shell script that checks tool_input.command against a blocklist", kit: "Included: pre-tool-guard.sh with 15+ patterns", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/branch-guard.sh" }
   },
   {
     cat: "safety",
     q: "Are API keys and secrets stored in dedicated files (not hardcoded in CLAUDE.md)?",
     w: 5,
-    rec: { pri: "high", title: "Move secrets out of CLAUDE.md", desc: "Hardcoded tokens in instruction files can be exposed through context sharing or screen recordings.", diy: "Move to ~/.credentials or environment variables", kit: "Included: credential management template" }
+    rec: { pri: "high", title: "Move secrets out of CLAUDE.md", desc: "Hardcoded tokens in instruction files can be exposed through context sharing or screen recordings.", diy: "Move to ~/.credentials or environment variables", kit: "Included: credential management template", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/CLAUDE-autonomous.md" }
   },
   {
     cat: "safety",
     q: "Does your setup prevent the AI from pushing to main/master without review?",
     w: 5,
-    rec: { pri: "med", title: "Guard git push to protected branches", desc: "Autonomous agents should push to feature branches, not directly to main.", diy: "Add branch check to PreToolUse hook", kit: "Included in pre-tool-guard.sh" }
+    rec: { pri: "med", title: "Guard git push to protected branches", desc: "Autonomous agents should push to feature branches, not directly to main.", diy: "Add branch check to PreToolUse hook", kit: "Included in pre-tool-guard.sh", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/branch-guard.sh" }
   },
   {
     cat: "safety",
     q: "Do you have a mechanism to block external API calls (curl POST/PUT) when errors exist?",
     w: 5,
-    rec: { pri: "med", title: "Add an error-aware gate", desc: "Prevent the AI from publishing or pushing when unresolved errors exist.", diy: "Implement err-tracker check in PreToolUse", kit: "Included: err-tracker-gate.sh" }
+    rec: { pri: "med", title: "Add an error-aware gate", desc: "Prevent the AI from publishing or pushing when unresolved errors exist.", diy: "Implement err-tracker check in PreToolUse", kit: "Included: err-tracker-gate.sh", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/error-gate.sh" }
   },
 
   // Quality (4 questions, 5 pts each = 20)
@@ -522,25 +524,25 @@ const QUESTIONS = [
     catDesc: "Catching errors before they compound",
     q: "Do you run syntax checks after every file edit (PostToolUse hook)?",
     w: 5,
-    rec: { pri: "high", title: "Add post-edit syntax checking", desc: "A PostToolUse hook on Edit/Write can run language-specific syntax checks immediately.", diy: "python -m py_compile for Python, eslint for JS, etc.", kit: "Included: syntax-check.sh with multi-language support" }
+    rec: { pri: "high", title: "Add post-edit syntax checking", desc: "A PostToolUse hook on Edit/Write can run language-specific syntax checks immediately.", diy: "python -m py_compile for Python, eslint for JS, etc.", kit: "Included: syntax-check.sh with multi-language support", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/syntax-check.sh" }
   },
   {
     cat: "quality",
     q: "Do you automatically detect and track error codes from bash output?",
     w: 5,
-    rec: { pri: "med", title: "Implement error detection", desc: "Scan bash output for error patterns and track them. Same error twice = escalate priority.", diy: "Grep bash output for ERR_CODE patterns in PostToolUse", kit: "Included: err-code-detector.sh + err-tracker CLI" }
+    rec: { pri: "med", title: "Implement error detection", desc: "Scan bash output for error patterns and track them. Same error twice = escalate priority.", diy: "Grep bash output for ERR_CODE patterns in PostToolUse", kit: "Included: err-code-detector.sh + err-tracker CLI", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/activity-logger.sh" }
   },
   {
     cat: "quality",
     q: "Do you have a Definition of Done (DoD) checklist for task completion?",
     w: 5,
-    rec: { pri: "low", title: "Create completion criteria", desc: "Define what 'done' means: tests pass, no open errors, syntax clean, docs updated.", diy: "Write a DoD checklist in CLAUDE.md", kit: "Included: dod-checklists.md template" }
+    rec: { pri: "low", title: "Create completion criteria", desc: "Define what 'done' means: tests pass, no open errors, syntax clean, docs updated.", diy: "Write a DoD checklist in CLAUDE.md", kit: "Included: dod-checklists.md template", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/dod-checklists.md" }
   },
   {
     cat: "quality",
     q: "Does your AI verify its own output (e.g., screenshots, GET requests after publishing)?",
     w: 5,
-    rec: { pri: "med", title: "Add output verification", desc: "Trust but verify. After publishing or deploying, confirm the result matches expectations.", diy: "Add verification steps to your workflow instructions", kit: "Included in mission.md template" }
+    rec: { pri: "med", title: "Add output verification", desc: "Trust but verify. After publishing or deploying, confirm the result matches expectations.", diy: "Add verification steps to your workflow instructions", kit: "Included in mission.md template", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/CLAUDE-autonomous.md" }
   },
 
   // Monitoring (3 questions)
@@ -549,19 +551,19 @@ const QUESTIONS = [
     catDesc: "Knowing what your AI is doing",
     q: "Do you monitor context window usage and get alerts before it fills up?",
     w: 5,
-    rec: { pri: "high", title: "Add context window monitoring", desc: "AI agents lose memory when context fills. Monitor usage and compact before critical.", diy: "Check context percentage in PostToolUse hook", kit: "Included: context-monitor.sh with 4-tier alerts" }
+    rec: { pri: "high", title: "Add context window monitoring", desc: "AI agents lose memory when context fills. Monitor usage and compact before critical.", diy: "Check context percentage in PostToolUse hook", kit: "Included: context-monitor.sh with 4-tier alerts", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/context-monitor.sh" }
   },
   {
     cat: "monitoring",
     q: "Do you have activity logging (what commands ran, when, what changed)?",
     w: 5,
-    rec: { pri: "med", title: "Implement activity logging", desc: "A PostToolUse hook can log every tool use to a JSONL file for later analysis.", diy: "Log tool_name + timestamp + summary to a file", kit: "Included: activity-logger.sh" }
+    rec: { pri: "med", title: "Implement activity logging", desc: "A PostToolUse hook can log every tool use to a JSONL file for later analysis.", diy: "Log tool_name + timestamp + summary to a file", kit: "Included: activity-logger.sh", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/activity-logger.sh" }
   },
   {
     cat: "monitoring",
     q: "Do you generate daily summaries of AI work (proof-log, session reports)?",
     w: 5,
-    rec: { pri: "low", title: "Add daily summarization", desc: "Auto-generate a 5W1H summary at session end. Makes handoffs and audits trivial.", diy: "Write a Stop hook that summarizes activity logs", kit: "Included: proof-log-session.sh" }
+    rec: { pri: "low", title: "Add daily summarization", desc: "Auto-generate a 5W1H summary at session end. Makes handoffs and audits trivial.", diy: "Write a Stop hook that summarizes activity logs", kit: "Included: proof-log-session.sh", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/proof-log-session.sh" }
   },
 
   // Recovery (3 questions)
@@ -570,19 +572,19 @@ const QUESTIONS = [
     catDesc: "Bouncing back from failures",
     q: "Do you create git backup branches before major changes?",
     w: 5,
-    rec: { pri: "high", title: "Add pre-change backups", desc: "git checkout -b backup/before-changes before risky operations. Cheap insurance.", diy: "Add to CLAUDE.md instructions", kit: "Included in CLAUDE.md template" }
+    rec: { pri: "high", title: "Add pre-change backups", desc: "git checkout -b backup/before-changes before risky operations. Cheap insurance.", diy: "Add to CLAUDE.md instructions", kit: "Included in CLAUDE.md template", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/CLAUDE-autonomous.md" }
   },
   {
     cat: "recovery",
     q: "Does your AI have a watchdog that detects and recovers from hangs?",
     w: 5,
-    rec: { pri: "med", title: "Implement a watchdog", desc: "Detect idle/frozen states and automatically restart or nudge the agent.", diy: "Write a tmux-based idle detector", kit: "Included: cc-solo-watchdog with auto-restart" }
+    rec: { pri: "med", title: "Implement a watchdog", desc: "Detect idle/frozen states and automatically restart or nudge the agent.", diy: "Write a tmux-based idle detector", kit: "Included: cc-solo-watchdog with auto-restart", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/session-start-marker.sh" }
   },
   {
     cat: "recovery",
     q: "Do you have a fallback plan when the AI gets stuck in a loop?",
     w: 5,
-    rec: { pri: "med", title: "Add loop detection", desc: "Track repeated command patterns. If the same error appears 3+ times, break and escalate.", diy: "Log command signatures and count repeats", kit: "Included: root-cause-prompt.sh" }
+    rec: { pri: "med", title: "Add loop detection", desc: "Track repeated command patterns. If the same error appears 3+ times, break and escalate.", diy: "Log command signatures and count repeats", kit: "Included: root-cause-prompt.sh", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/LESSONS.md" }
   },
 
   // Autonomy (3 questions)
@@ -591,19 +593,19 @@ const QUESTIONS = [
     catDesc: "Running without human intervention",
     q: "Can your AI run tasks from a queue without human prompting?",
     w: 5,
-    rec: { pri: "med", title: "Implement a task queue", desc: "YAML-based task queue that the AI reads, executes, and marks complete.", diy: "Create a task-queue.yaml with status tracking", kit: "Included: task-queue.yaml + task-queue CLI" }
+    rec: { pri: "med", title: "Implement a task queue", desc: "YAML-based task queue that the AI reads, executes, and marks complete.", diy: "Create a task-queue.yaml with status tracking", kit: "Included: task-queue.yaml + task-queue CLI", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/task-queue.yaml" }
   },
   {
     cat: "autonomy",
     q: "Does your setup block the AI from asking unnecessary questions?",
     w: 5,
-    rec: { pri: "low", title: "Reduce human dependency", desc: "A hook that detects 'What would you like?' patterns and redirects to autonomous decision-making.", diy: "Add 'don't ask, decide' rules to CLAUDE.md", kit: "Included: no-ask-human.sh hook" }
+    rec: { pri: "low", title: "Reduce human dependency", desc: "A hook that detects 'What would you like?' patterns and redirects to autonomous decision-making.", diy: "Add 'don't ask, decide' rules to CLAUDE.md", kit: "Included: no-ask-human.sh hook", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/no-ask-human.sh" }
   },
   {
     cat: "autonomy",
     q: "Can your AI continue working across session restarts (persistent state)?",
     w: 5,
-    rec: { pri: "med", title: "Add state persistence", desc: "Use mission.md or MEMORY.md to maintain state across context compactions and restarts.", diy: "Write current state to a file on session end", kit: "Included: mission.md + MEMORY.md templates" }
+    rec: { pri: "med", title: "Add state persistence", desc: "Use mission.md or MEMORY.md to maintain state across context compactions and restarts.", diy: "Write current state to a file on session end", kit: "Included: mission.md + MEMORY.md templates", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/mission.md" }
   },
 
   // Coordination (3 questions)
@@ -612,19 +614,19 @@ const QUESTIONS = [
     catDesc: "Working with multiple agents or tools",
     q: "Do you have a decision audit trail (why was each decision made)?",
     w: 5,
-    rec: { pri: "low", title: "Log decisions with rationale", desc: "Track what was decided, why, and what alternatives were rejected.", diy: "Add decision logging to PostToolUse", kit: "Included: decision-log support in activity-logger" }
+    rec: { pri: "low", title: "Log decisions with rationale", desc: "Track what was decided, why, and what alternatives were rejected.", diy: "Add decision logging to PostToolUse", kit: "Included: decision-log support in activity-logger", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/hooks/decision-warn.sh" }
   },
   {
     cat: "coordination",
     q: "Can your AI coordinate with other AI instances or tools?",
     w: 3,
-    rec: { pri: "low", title: "Enable multi-agent communication", desc: "File-based or tmux-based messaging between AI instances.", diy: "Use shared files or tmux send-keys", kit: "Included: agent-relay.sh + tachikoma messaging" }
+    rec: { pri: "low", title: "Enable multi-agent communication", desc: "File-based or tmux-based messaging between AI instances.", diy: "Use shared files or tmux send-keys", kit: "Included: agent-relay.sh + tachikoma messaging", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/CLAUDE-autonomous.md" }
   },
   {
     cat: "coordination",
     q: "Do you have a structured way to capture and reuse lessons learned?",
     w: 2,
-    rec: { pri: "low", title: "Implement lesson capture", desc: "Automatically log errors and their fixes for future reference.", diy: "Maintain a LESSONS.md file", kit: "Included: shared-brain knowledge base system" }
+    rec: { pri: "low", title: "Implement lesson capture", desc: "Automatically log errors and their fixes for future reference.", diy: "Maintain a LESSONS.md file", kit: "Included: shared-brain knowledge base system", hookUrl: "https://github.com/yurukusa/claude-code-hooks/blob/main/templates/LESSONS.md" }
   }
 ];
 
@@ -778,11 +780,14 @@ function showResults() {
   recs.forEach(r => {
     const li = document.createElement('li');
     li.className = `rec-item ${r.pri}`;
+    const hookLink = r.hookUrl
+      ? `<a class="rec-hook-link" href="${r.hookUrl}" target="_blank" rel="noopener">↳ claude-code-hooks: ${r.hookUrl.split('/').pop()}</a>`
+      : '';
     li.innerHTML = `
       <div class="rec-title">${r.title}</div>
       <div class="rec-desc">${r.desc}</div>
       <span class="rec-tag diy">DIY: ${r.diy}</span>
-      <span class="rec-tag kit">Kit: ${r.kit}</span>
+      ${hookLink}
     `;
     recList.appendChild(li);
   });

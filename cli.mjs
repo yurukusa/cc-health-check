@@ -158,6 +158,7 @@ const checks = [
         : { pass: false, detail: `${preHooks.length} PreToolUse hook(s) found but no safety patterns detected` };
     },
     fix: 'Add a PreToolUse hook that blocks destructive commands. A single shell script can catch rm -rf, force push, and database drops.',
+    hook: 'hooks/branch-guard.sh',
   },
   {
     cat: 'Safety Guards',
@@ -172,6 +173,7 @@ const checks = [
       return { pass: true, detail: hasCredFile ? 'Credentials stored in dedicated file' : 'No leaked keys detected in CLAUDE.md' };
     },
     fix: 'Move API keys out of CLAUDE.md into ~/.credentials or environment variables.',
+    hook: 'templates/CLAUDE-autonomous.md',
   },
   {
     cat: 'Safety Guards',
@@ -187,6 +189,7 @@ const checks = [
         : { pass: false, detail: 'No branch protection rules found' };
     },
     fix: 'Add a PreToolUse hook that checks the target branch before git push. Block direct pushes to main/master.',
+    hook: 'hooks/branch-guard.sh',
   },
   {
     cat: 'Safety Guards',
@@ -201,6 +204,7 @@ const checks = [
         : { pass: false, detail: 'No error-aware gate found' };
     },
     fix: 'Add an error-tracker that prevents publishing or pushing when unresolved errors exist.',
+    hook: 'hooks/error-gate.sh',
   },
 
   // === QUALITY (4 checks, 5pts each = 20) ===
@@ -220,6 +224,7 @@ const checks = [
         : { pass: false, detail: 'No syntax check hook found in PostToolUse' };
     },
     fix: 'Add a PostToolUse hook on Edit/Write that runs language-specific syntax checks (py_compile, eslint, bash -n).',
+    hook: 'hooks/syntax-check.sh',
   },
   {
     cat: 'Code Quality',
@@ -233,6 +238,7 @@ const checks = [
         : { pass: false, detail: 'No error detection in command output' };
     },
     fix: 'Scan bash output for error patterns in PostToolUse hooks. Track repeated errors and escalate.',
+    hook: 'hooks/activity-logger.sh',
   },
   {
     cat: 'Code Quality',
@@ -248,6 +254,7 @@ const checks = [
         : { pass: false, detail: 'No Definition of Done checklist detected' };
     },
     fix: 'Define what "done" means: tests pass, no open errors, syntax clean, docs updated.',
+    hook: 'templates/dod-checklists.md',
   },
   {
     cat: 'Code Quality',
@@ -261,6 +268,7 @@ const checks = [
         : { pass: false, detail: 'No output verification pattern detected' };
     },
     fix: 'Add verification steps to your workflow: after publishing or deploying, confirm the result matches expectations.',
+    hook: 'templates/CLAUDE-autonomous.md',
   },
 
   // === MONITORING (3 checks, 5pts each = 15) ===
@@ -276,6 +284,7 @@ const checks = [
         : { pass: false, detail: 'No context window monitoring' };
     },
     fix: 'Add a PostToolUse hook that checks context percentage and alerts before it fills up. Auto-compact at critical levels.',
+    hook: 'hooks/context-monitor.sh',
   },
   {
     cat: 'Monitoring',
@@ -289,6 +298,7 @@ const checks = [
         : { pass: false, detail: 'No activity logging configured' };
     },
     fix: 'Add a PostToolUse hook that logs every tool use to a JSONL file with timestamps.',
+    hook: 'hooks/activity-logger.sh',
   },
   {
     cat: 'Monitoring',
@@ -303,6 +313,7 @@ const checks = [
         : { pass: false, detail: 'No daily summary generation' };
     },
     fix: 'Write a Stop hook that generates a 5W1H summary at session end. Makes handoffs and audits trivial.',
+    hook: 'hooks/proof-log-session.sh',
   },
 
   // === RECOVERY (3 checks, 5pts each = 15) ===
@@ -317,6 +328,7 @@ const checks = [
         : { pass: false, detail: 'No backup branch strategy detected' };
     },
     fix: 'Add "git checkout -b backup/before-changes" to your CLAUDE.md instructions before risky operations.',
+    hook: 'templates/CLAUDE-autonomous.md',
   },
   {
     cat: 'Recovery',
@@ -333,6 +345,7 @@ const checks = [
         : { pass: false, detail: 'No watchdog for hang/idle detection' };
     },
     fix: 'Implement a tmux-based watchdog that detects idle/frozen states and automatically nudges or restarts the agent.',
+    hook: 'hooks/session-start-marker.sh',
   },
   {
     cat: 'Recovery',
@@ -347,6 +360,7 @@ const checks = [
         : { pass: false, detail: 'No loop detection or retry limits' };
     },
     fix: 'Track repeated command patterns. If the same error appears 3+ times, break the loop and escalate.',
+    hook: 'templates/LESSONS.md',
   },
 
   // === AUTONOMY (3 checks, 5pts each = 15) ===
@@ -364,6 +378,7 @@ const checks = [
         : { pass: false, detail: 'No task queue for autonomous execution' };
     },
     fix: 'Create a task-queue.yaml with status tracking (pending/in-progress/done) that the AI reads and executes.',
+    hook: 'templates/task-queue.yaml',
   },
   {
     cat: 'Autonomy',
@@ -378,6 +393,7 @@ const checks = [
         : { pass: false, detail: 'No rules to prevent unnecessary questions' };
     },
     fix: 'Add a hook or CLAUDE.md rule that redirects question-asking patterns to autonomous decision-making.',
+    hook: 'hooks/no-ask-human.sh',
   },
   {
     cat: 'Autonomy',
@@ -392,6 +408,7 @@ const checks = [
         : { pass: false, detail: 'No persistent state mechanism' };
     },
     fix: 'Use mission.md or MEMORY.md to maintain state across context compactions and session restarts.',
+    hook: 'templates/mission.md',
   },
 
   // === COORDINATION (3 checks, 5+3+2 = 10) ===
@@ -407,6 +424,7 @@ const checks = [
         : { pass: false, detail: 'No decision audit trail' };
     },
     fix: 'Track decisions with rationale — what was decided, why, and what alternatives were rejected.',
+    hook: 'hooks/decision-warn.sh',
   },
   {
     cat: 'Coordination',
@@ -421,6 +439,7 @@ const checks = [
         : { pass: false, detail: 'No multi-agent coordination' };
     },
     fix: 'Enable file-based or tmux-based messaging between AI instances for parallel work.',
+    hook: 'templates/CLAUDE-autonomous.md',
   },
   {
     cat: 'Coordination',
@@ -435,6 +454,7 @@ const checks = [
         : { pass: false, detail: 'No structured lesson capture' };
     },
     fix: 'Maintain a LESSONS.md file to log errors and their fixes for future reference.',
+    hook: 'templates/LESSONS.md',
   },
 ];
 
@@ -456,7 +476,7 @@ function runChecks() {
     const pts = result.pass ? ch.w : 0;
     earned += pts;
     dimScores[ch.cat] += pts;
-    results.push({ cat: ch.cat, q: ch.q, w: ch.w, fix: ch.fix, result, pts });
+    results.push({ cat: ch.cat, q: ch.q, w: ch.w, fix: ch.fix, hook: ch.hook, result, pts });
   }
 
   const pct = Math.round((earned / totalPts) * 100);
@@ -521,6 +541,9 @@ function printHuman(data) {
     console.log(`  ${c.bold}Top fixes:${c.reset}`);
     for (const f of failures.slice(0, 5)) {
       console.log(`    ${c.yellow}→${c.reset} ${f.fix}`);
+      if (f.hook) {
+        console.log(`      ${c.dim}claude-code-hooks: ${f.hook}${c.reset}`);
+      }
     }
     console.log('');
     console.log(`  ${c.cyan}Production hooks + templates for autonomous Claude Code:${c.reset}`);
@@ -564,6 +587,7 @@ function printJSON(data) {
       detail: r.result.detail,
       weight: r.w,
       fix: r.result.pass ? undefined : r.fix,
+      hook: r.result.pass ? undefined : r.hook,
     });
   }
   console.log(JSON.stringify(output, null, 2));

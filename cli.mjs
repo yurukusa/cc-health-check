@@ -542,7 +542,8 @@ function printHuman(data) {
     for (const f of failures.slice(0, 5)) {
       console.log(`    ${c.yellow}→${c.reset} ${f.fix}`);
       if (f.hook) {
-        console.log(`      ${c.dim}claude-code-hooks: ${f.hook}${c.reset}`);
+        const url = `https://github.com/yurukusa/claude-code-hooks/blob/main/${f.hook}`;
+        console.log(`      ${c.dim}↳ ${url}${c.reset}`);
       }
     }
     console.log('');

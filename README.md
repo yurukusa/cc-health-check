@@ -149,6 +149,10 @@ jobs:
 | [cc-wrapped](https://yurukusa.github.io/cc-wrapped/) | Your AI year in review |
 | [cc-roast](https://yurukusa.github.io/cc-roast/) | Your CLAUDE.md, brutally honest |
 
+### Need it all set up?
+
+**[Claude Code Ops Kit](https://yurukusa.gumroad.com/l/pkbbl?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** ($19) — All 12 hooks + 3 tools + install.sh. Fix what cc-health-check found in 15 minutes.
+
 ## License
 
 MIT

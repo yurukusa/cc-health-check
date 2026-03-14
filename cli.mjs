@@ -548,10 +548,11 @@ function printHuman(data) {
     }
     console.log('');
     console.log(`  ${c.cyan}Production hooks + templates for autonomous Claude Code:${c.reset}`);
-    console.log(`  ${c.bold}https://yurukusa.gumroad.com/l/cc-codex-ops-kit${c.reset}`);
-    console.log(`  ${c.dim}10 hooks + 5 templates covering 18/20 checks. From 108 hours of real autonomous operation.${c.reset}`);
+    console.log(`  ${c.bold}https://yurukusa.gumroad.com/l/pkbbl?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check${c.reset}`);
+    console.log(`  ${c.dim}12 hooks + 3 tools + install.sh — ready in 15 minutes. $19${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
+    console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);
   }
 
   console.log('');

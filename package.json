@@ -18,6 +18,7 @@
   ],
   "author": "yurukusa",
   "license": "MIT",
+  "homepage": "https://github.com/yurukusa/cc-health-check",
   "repository": {
     "type": "git",
     "url": "https://github.com/yurukusa/cc-health-check"

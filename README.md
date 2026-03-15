@@ -2,7 +2,7 @@
 
 > **Is your Claude Code setup actually production-ready?**
 >
-> 108 hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
+> 140+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
 
 ```
 npx cc-health-check
@@ -77,7 +77,7 @@ npx cc-health-check
 
 ## Got a low score?
 
-**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 108 hours of real autonomous operation.
+**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 140+ hours of real autonomous operation.
 
 ```bash
 # See what you're missing

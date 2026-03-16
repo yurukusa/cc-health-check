@@ -151,7 +151,7 @@ jobs:
 
 ### Need it all set up?
 
-**[Claude Code Ops Kit](https://yurukusa.gumroad.com/l/pkbbl?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** ($19) — 10 hooks + 6 templates + 3 tools + install.sh. Fix what cc-health-check found in 15 minutes.
+**[Claude Code Ops Kit](https://yurukusa.gumroad.com/l/cc-codex-ops-kit?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** ($19) — 10 hooks + 6 templates + 3 tools + install.sh. Fix what cc-health-check found in 15 minutes.
 
 ## License
 

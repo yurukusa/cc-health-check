@@ -549,7 +549,7 @@ function printHuman(data) {
     console.log('');
     console.log(`  ${c.cyan}Fix ${failures.length === 1 ? 'this' : 'these'} with production-ready hooks + templates:${c.reset}`);
     console.log(`  ${c.bold}https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check${c.reset}`);
-    console.log(`  ${c.dim}10 hooks + 6 templates + 3 tools — ready in 15 minutes. $19${c.reset}`);
+    console.log(`  ${c.dim}11 hooks + 6 templates + 3 tools — ready in 15 minutes. $19${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);

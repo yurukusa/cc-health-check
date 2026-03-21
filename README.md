@@ -1,5 +1,9 @@
 # cc-health-check
 
+[![npm version](https://img.shields.io/npm/v/cc-health-check)](https://www.npmjs.com/package/cc-health-check)
+[![npm downloads](https://img.shields.io/npm/dw/cc-health-check)](https://www.npmjs.com/package/cc-health-check)
+[![tests](https://github.com/yurukusa/cc-health-check/actions/workflows/test.yml/badge.svg)](https://github.com/yurukusa/cc-health-check/actions/workflows/test.yml)
+
 > **Is your Claude Code setup actually production-ready?**
 >
 > 160+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.

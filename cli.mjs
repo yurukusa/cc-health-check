@@ -548,7 +548,7 @@ function printHuman(data) {
     }
     console.log('');
     console.log(`  ${c.cyan}Quick fix (free):${c.reset} ${c.bold}npx cc-safe-setup${c.reset}`);
-    console.log(`  ${c.dim}Installs 7 safety hooks in 10 seconds${c.reset}`);
+    console.log(`  ${c.dim}Installs 8 safety hooks in 10 seconds${c.reset}`);
     console.log('');
     console.log(`  ${c.cyan}Full kit:${c.reset}`);
     console.log(`  ${c.bold}https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check${c.reset}`);

@@ -1,5 +1,9 @@
 # cc-health-check
 
+[![npm version](https://img.shields.io/npm/v/cc-health-check)](https://www.npmjs.com/package/cc-health-check)
+[![npm downloads](https://img.shields.io/npm/dw/cc-health-check)](https://www.npmjs.com/package/cc-health-check)
+[![tests](https://github.com/yurukusa/cc-health-check/actions/workflows/test.yml/badge.svg)](https://github.com/yurukusa/cc-health-check/actions/workflows/test.yml)
+
 > **Is your Claude Code setup actually production-ready?**
 >
 > 160+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
@@ -155,6 +159,8 @@ jobs:
 **Quick fix (free):** `npx cc-safe-setup` — 7 hooks, 10 seconds, score jumps from 50 to 95.
 
 **[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 5 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes.
+
+If cc-health-check helped you improve your setup, consider giving it a ⭐ — it helps others find this tool.
 
 ## License
 

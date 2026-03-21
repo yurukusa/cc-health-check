@@ -30,5 +30,8 @@
     "cli.mjs",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "scripts": {
+    "test": "bash test.sh"
+  }
 }

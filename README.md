@@ -160,6 +160,8 @@ jobs:
 
 **[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 5 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes.
 
+If cc-health-check helped you improve your setup, consider giving it a ⭐ — it helps others find this tool.
+
 ## License
 
 MIT

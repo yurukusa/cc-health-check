@@ -547,12 +547,16 @@ function printHuman(data) {
       }
     }
     console.log('');
-    console.log(`  ${c.cyan}Production hooks + templates for autonomous Claude Code:${c.reset}`);
+    console.log(`  ${c.cyan}Quick fix (free):${c.reset} ${c.bold}npx cc-safe-setup${c.reset}`);
+    console.log(`  ${c.dim}Installs 7 safety hooks in 10 seconds${c.reset}`);
+    console.log('');
+    console.log(`  ${c.cyan}Full kit:${c.reset}`);
     console.log(`  ${c.bold}https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check${c.reset}`);
-    console.log(`  ${c.dim}16 hooks + 3 tools + install.sh — ready in 15 minutes. $19${c.reset}`);
+    console.log(`  ${c.dim}16 hooks + 6 templates + 3 tools — ready in 15 minutes${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);
+    console.log(`  ${c.dim}Want the full safety kit? https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check-pass${c.reset}`);
   }
 
   console.log('');

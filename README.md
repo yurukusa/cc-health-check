@@ -2,7 +2,7 @@
 
 > **Is your Claude Code setup actually production-ready?**
 >
-> 108 hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
+> 140+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
 
 ```
 npx cc-health-check
@@ -77,7 +77,7 @@ npx cc-health-check
 
 ## Got a low score?
 
-**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 108 hours of real autonomous operation.
+**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 140+ hours of real autonomous operation.
 
 ```bash
 # See what you're missing
@@ -142,7 +142,8 @@ jobs:
 | Tool | What it does |
 |------|--------------|
 | **cc-health-check** | Is your AI **setup** safe? (you are here) |
-| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | Fix your score — 10 hooks + 5 templates |
+| [cc-safe-setup](https://github.com/yurukusa/cc-safe-setup) | **Fix your score in 10 seconds** — `npx cc-safe-setup` |
+| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | All 16 hooks + 5 templates (free OSS) |
 | [cc-session-stats](https://github.com/yurukusa/cc-session-stats) | How much are you **using** AI? |
 | [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 | [cc-cost-check](https://github.com/yurukusa/cc-cost-check) | Cost per commit calculator |
@@ -151,7 +152,9 @@ jobs:
 
 ### Need it all set up?
 
-**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=claude-code-health-check?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** ($19) — All 12 hooks + 3 tools + install.sh. Fix what cc-health-check found in 15 minutes.
+**Quick fix (free):** `npx cc-safe-setup` — 7 hooks, 10 seconds, score jumps from 50 to 95.
+
+**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 6 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes.
 
 ## License
 

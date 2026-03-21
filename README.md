@@ -156,7 +156,7 @@ jobs:
 
 ### Need it all set up?
 
-**Quick fix (free):** `npx cc-safe-setup` — 7 hooks, 10 seconds, score jumps from 50 to 95.
+**Quick fix (free):** `npx cc-safe-setup` — 8 hooks, 10 seconds, score jumps from 50 to 95.
 
 **[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 5 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes.
 

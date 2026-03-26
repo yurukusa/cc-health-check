@@ -81,15 +81,9 @@ npx cc-health-check
 
 ## Got a low score?
 
-**[claude-code-hooks](https://github.com/yurukusa/claude-code-hooks)** covers 18 of the 20 checks — drop-in hooks and templates extracted from 160+ hours of real autonomous operation.
+**Quickest fix:** `npx cc-safe-setup` — 8 safety hooks in 10 seconds. Score jumps from ~30 to ~80.
 
-```bash
-# See what you're missing
-npx cc-health-check
-
-# Fix it
-git clone https://github.com/yurukusa/claude-code-hooks
-```
+**Full fix:** [Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check-low-score) — 16 hooks + 6 templates + 3 tools. Pay what you want.
 
 ---
 
@@ -147,7 +141,7 @@ jobs:
 |------|--------------|
 | **cc-health-check** | Is your AI **setup** safe? (you are here) |
 | [cc-safe-setup](https://github.com/yurukusa/cc-safe-setup) | **Fix your score in 10 seconds** — `npx cc-safe-setup` |
-| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | All 16 hooks + 5 templates (free OSS) |
+| [claude-code-hooks](https://github.com/yurukusa/claude-code-hooks) | All 16 hooks + 6 templates (free OSS) |
 | [cc-session-stats](https://github.com/yurukusa/cc-session-stats) | How much are you **using** AI? |
 | [cc-audit-log](https://github.com/yurukusa/cc-audit-log) | What did your AI **do**? |
 | [cc-cost-check](https://github.com/yurukusa/cc-cost-check) | Cost per commit calculator |
@@ -158,7 +152,7 @@ jobs:
 
 **Quick fix (free):** `npx cc-safe-setup` — 8 hooks, 10 seconds, score jumps from 50 to 95.
 
-**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 5 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes.
+**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 6 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes. Pay what you want.
 
 If cc-health-check helped you improve your setup, consider giving it a ⭐ — it helps others find this tool.
 

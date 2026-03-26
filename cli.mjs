@@ -550,13 +550,13 @@ function printHuman(data) {
     console.log(`  ${c.cyan}Quick fix (free):${c.reset} ${c.bold}npx cc-safe-setup${c.reset}`);
     console.log(`  ${c.dim}Installs 8 safety hooks in 10 seconds${c.reset}`);
     console.log('');
-    console.log(`  ${c.cyan}Full kit:${c.reset}`);
-    console.log(`  ${c.bold}https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check${c.reset}`);
-    console.log(`  ${c.dim}16 hooks + 6 templates + 3 tools — ready in 15 minutes (pay what you want)${c.reset}`);
+    console.log(`  ${c.cyan}Deep dive:${c.reset}`);
+    console.log(`  ${c.bold}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
+    console.log(`  ${c.dim}Production guide from 700+ hours of autonomous operation (¥800)${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);
-    console.log(`  ${c.dim}Want the full safety kit? https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=npm&utm_medium=cli&utm_campaign=ops-kit&ref=health-check-pass${c.reset}`);
+    console.log(`  ${c.dim}Go deeper: https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
   }
 
   console.log('');

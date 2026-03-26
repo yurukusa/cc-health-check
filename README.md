@@ -93,7 +93,11 @@ npx cc-health-check
 2. Scans `CLAUDE.md` files (global + project) for patterns
 3. Checks for common files (`mission.md`, `proof-log/`, `task-queue.yaml`)
 4. Scores each check (pass/fail) and calculates dimension scores
-5. Outputs actionable recommendations sorted by impact
+5. Outputs actionable recommendations with one-click install commands:
+   ```
+   → Add a PreToolUse hook that blocks destructive commands.
+     $ npx cc-safe-setup --install-example rm-safety-net
+   ```
 
 **Zero dependencies. No data sent anywhere. Runs entirely local.**
 

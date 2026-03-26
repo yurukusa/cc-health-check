@@ -159,6 +159,7 @@ const checks = [
     },
     fix: 'Add a PreToolUse hook that blocks destructive commands. A single shell script can catch rm -rf, force push, and database drops.',
     hook: 'hooks/branch-guard.sh',
+    recommend: ['rm-safety-net', 'no-sudo-guard', 'credential-exfil-guard'],
   },
   {
     cat: 'Safety Guards',
@@ -174,6 +175,7 @@ const checks = [
     },
     fix: 'Move API keys out of CLAUDE.md into ~/.credentials or environment variables.',
     hook: 'templates/CLAUDE-autonomous.md',
+    recommend: ['hardcoded-secret-detector', 'write-secret-guard', 'output-secret-mask'],
   },
   {
     cat: 'Safety Guards',
@@ -190,6 +192,7 @@ const checks = [
     },
     fix: 'Add a PreToolUse hook that checks the target branch before git push. Block direct pushes to main/master.',
     hook: 'hooks/branch-guard.sh',
+    recommend: ['no-push-without-ci', 'git-remote-guard', 'no-git-amend-push'],
   },
   {
     cat: 'Safety Guards',
@@ -205,6 +208,7 @@ const checks = [
     },
     fix: 'Add an error-tracker that prevents publishing or pushing when unresolved errors exist.',
     hook: 'hooks/error-gate.sh',
+    recommend: ['error-memory-guard', 'verify-before-done', 'verify-before-commit'],
   },
 
   // === QUALITY (4 checks, 5pts each = 20) ===
@@ -225,6 +229,7 @@ const checks = [
     },
     fix: 'Add a PostToolUse hook on Edit/Write that runs language-specific syntax checks (py_compile, eslint, bash -n).',
     hook: 'hooks/syntax-check.sh',
+    recommend: ['edit-verify'],
   },
   {
     cat: 'Code Quality',
@@ -239,6 +244,7 @@ const checks = [
     },
     fix: 'Scan bash output for error patterns in PostToolUse hooks. Track repeated errors and escalate.',
     hook: 'hooks/activity-logger.sh',
+    recommend: ['loop-detector', 'file-change-tracker'],
   },
   {
     cat: 'Code Quality',
@@ -255,6 +261,7 @@ const checks = [
     },
     fix: 'Define what "done" means: tests pass, no open errors, syntax clean, docs updated.',
     hook: 'templates/dod-checklists.md',
+    recommend: ['verify-before-done', 'test-before-commit'],
   },
   {
     cat: 'Code Quality',
@@ -269,6 +276,7 @@ const checks = [
     },
     fix: 'Add verification steps to your workflow: after publishing or deploying, confirm the result matches expectations.',
     hook: 'templates/CLAUDE-autonomous.md',
+    recommend: ['verify-before-done', 'verify-before-commit'],
   },
 
   // === MONITORING (3 checks, 5pts each = 15) ===
@@ -285,6 +293,7 @@ const checks = [
     },
     fix: 'Add a PostToolUse hook that checks context percentage and alerts before it fills up. Auto-compact at critical levels.',
     hook: 'hooks/context-monitor.sh',
+    recommend: ['compact-reminder', 'auto-compact-prep', 'session-token-counter'],
   },
   {
     cat: 'Monitoring',
@@ -299,6 +308,7 @@ const checks = [
     },
     fix: 'Add a PostToolUse hook that logs every tool use to a JSONL file with timestamps.',
     hook: 'hooks/activity-logger.sh',
+    recommend: ['permission-audit-log'],
   },
   {
     cat: 'Monitoring',
@@ -314,6 +324,7 @@ const checks = [
     },
     fix: 'Write a Stop hook that generates a 5W1H summary at session end. Makes handoffs and audits trivial.',
     hook: 'hooks/proof-log-session.sh',
+    recommend: ['session-summary', 'session-summary-stop', 'session-handoff'],
   },
 
   // === RECOVERY (3 checks, 5pts each = 15) ===
@@ -329,6 +340,7 @@ const checks = [
     },
     fix: 'Add "git checkout -b backup/before-changes" to your CLAUDE.md instructions before risky operations.',
     hook: 'templates/CLAUDE-autonomous.md',
+    recommend: ['auto-git-checkpoint', 'backup-before-refactor', 'auto-checkpoint'],
   },
   {
     cat: 'Recovery',
@@ -346,6 +358,7 @@ const checks = [
     },
     fix: 'Implement a tmux-based watchdog that detects idle/frozen states and automatically nudges or restarts the agent.',
     hook: 'hooks/session-start-marker.sh',
+    recommend: ['notify-waiting', 'max-session-duration'],
   },
   {
     cat: 'Recovery',
@@ -361,6 +374,7 @@ const checks = [
     },
     fix: 'Track repeated command patterns. If the same error appears 3+ times, break the loop and escalate.',
     hook: 'templates/LESSONS.md',
+    recommend: ['loop-detector'],
   },
 
   // === AUTONOMY (3 checks, 5pts each = 15) ===
@@ -379,6 +393,7 @@ const checks = [
     },
     fix: 'Create a task-queue.yaml with status tracking (pending/in-progress/done) that the AI reads and executes.',
     hook: 'templates/task-queue.yaml',
+    recommend: [],
   },
   {
     cat: 'Autonomy',
@@ -394,6 +409,7 @@ const checks = [
     },
     fix: 'Add a hook or CLAUDE.md rule that redirects question-asking patterns to autonomous decision-making.',
     hook: 'hooks/no-ask-human.sh',
+    recommend: [],
   },
   {
     cat: 'Autonomy',
@@ -409,6 +425,7 @@ const checks = [
     },
     fix: 'Use mission.md or MEMORY.md to maintain state across context compactions and session restarts.',
     hook: 'templates/mission.md',
+    recommend: ['session-state-saver', 'post-compact-restore', 'session-checkpoint'],
   },
 
   // === COORDINATION (3 checks, 5+3+2 = 10) ===
@@ -425,6 +442,7 @@ const checks = [
     },
     fix: 'Track decisions with rationale — what was decided, why, and what alternatives were rejected.',
     hook: 'hooks/decision-warn.sh',
+    recommend: ['permission-audit-log'],
   },
   {
     cat: 'Coordination',
@@ -440,6 +458,7 @@ const checks = [
     },
     fix: 'Enable file-based or tmux-based messaging between AI instances for parallel work.',
     hook: 'templates/CLAUDE-autonomous.md',
+    recommend: ['subagent-scope-guard', 'subagent-budget-guard'],
   },
   {
     cat: 'Coordination',
@@ -455,6 +474,7 @@ const checks = [
     },
     fix: 'Maintain a LESSONS.md file to log errors and their fixes for future reference.',
     hook: 'templates/LESSONS.md',
+    recommend: [],
   },
 ];
 
@@ -476,7 +496,7 @@ function runChecks() {
     const pts = result.pass ? ch.w : 0;
     earned += pts;
     dimScores[ch.cat] += pts;
-    results.push({ cat: ch.cat, q: ch.q, w: ch.w, fix: ch.fix, hook: ch.hook, result, pts });
+    results.push({ cat: ch.cat, q: ch.q, w: ch.w, fix: ch.fix, hook: ch.hook, recommend: ch.recommend, result, pts });
   }
 
   const pct = Math.round((earned / totalPts) * 100);
@@ -493,7 +513,9 @@ function printHuman(data) {
   const { results, dimScores, dimTotals, earned, totalPts, pct, grade } = data;
 
   console.log('');
-  console.log(`${c.bold}${c.cyan}  Claude Code Health Check v1.0${c.reset}`);
+  const pkg = readJSON(new URL('./package.json', import.meta.url).pathname);
+  const ver = pkg?.version || '1.0';
+  console.log(`${c.bold}${c.cyan}  Claude Code Health Check v${ver}${c.reset}`);
   console.log(`${c.dim}  ═══════════════════════════════════════${c.reset}`);
   console.log(`${c.dim}  Scanning: ${CC_DIR}${c.reset}`);
   console.log('');
@@ -541,14 +563,15 @@ function printHuman(data) {
     console.log(`  ${c.bold}Top fixes:${c.reset}`);
     for (const f of failures.slice(0, 5)) {
       console.log(`    ${c.yellow}→${c.reset} ${f.fix}`);
-      if (f.hook) {
-        const url = `https://github.com/yurukusa/claude-code-hooks/blob/main/${f.hook}`;
-        console.log(`      ${c.dim}↳ ${url}${c.reset}`);
+      if (f.recommend && f.recommend.length > 0) {
+        for (const hookName of f.recommend.slice(0, 2)) {
+          console.log(`      ${c.cyan}$${c.reset} ${c.bold}npx cc-safe-setup --install-example ${hookName}${c.reset}`);
+        }
       }
     }
     console.log('');
     console.log(`  ${c.cyan}Quick fix (free):${c.reset} ${c.bold}npx cc-safe-setup${c.reset}`);
-    console.log(`  ${c.dim}Installs 8 safety hooks in 10 seconds${c.reset}`);
+    console.log(`  ${c.dim}Installs 8 safety hooks in 10 seconds. 347 more available via --install-example.${c.reset}`);
     console.log('');
     console.log(`  ${c.cyan}Deep dive:${c.reset}`);
     console.log(`  ${c.bold}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
@@ -594,6 +617,7 @@ function printJSON(data) {
       weight: r.w,
       fix: r.result.pass ? undefined : r.fix,
       hook: r.result.pass ? undefined : r.hook,
+      recommend: r.result.pass ? undefined : r.recommend?.filter(h => h) || [],
     });
   }
   console.log(JSON.stringify(output, null, 2));

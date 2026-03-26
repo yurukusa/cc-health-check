@@ -6,7 +6,7 @@
 
 > **Is your Claude Code setup actually production-ready?**
 >
-> 160+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
+> 700+ hours of autonomous AI operation taught us what breaks first. This tool checks your setup against 20 real failure patterns — in 30 seconds.
 
 ```
 npx cc-health-check

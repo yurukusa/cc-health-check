@@ -570,12 +570,9 @@ function printHuman(data) {
       }
     }
     console.log('');
-    console.log(`  ${c.cyan}Quick fix (free):${c.reset} ${c.bold}npx cc-safe-setup${c.reset}`);
-    console.log(`  ${c.dim}Installs 8 safety hooks in 10 seconds. 347 more available via --install-example.${c.reset}`);
-    console.log('');
-    console.log(`  ${c.cyan}Deep dive:${c.reset}`);
-    console.log(`  ${c.bold}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
-    console.log(`  ${c.dim}Production guide from 700+ hours of autonomous operation (¥800)${c.reset}`);
+    console.log(`  ${c.cyan}Quick fix:${c.reset} ${c.bold}npx cc-safe-setup${c.reset}  ${c.dim}(8 safety hooks in 10 seconds)${c.reset}`);
+    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 348+ hooks)${c.reset}`);
+    console.log(`  ${c.cyan}Deep dive:${c.reset} ${c.dim}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);

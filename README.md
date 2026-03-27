@@ -83,7 +83,7 @@ npx cc-health-check
 
 **Quickest fix:** `npx cc-safe-setup` — 8 safety hooks in 10 seconds. Score jumps from ~30 to ~80.
 
-**Full fix:** [Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check-low-score) — 16 hooks + 6 templates + 3 tools. Pay what you want.
+**Full fix:** [Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check-low-score) — 6 hooks + 5 templates + 9 scripts. Pay what you want ($0+).
 
 ---
 
@@ -156,7 +156,7 @@ jobs:
 
 **Quick fix (free):** `npx cc-safe-setup` — 8 hooks, 10 seconds, score jumps from 50 to 95.
 
-**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 16 hooks + 6 templates + 3 tools + install.sh. Fix everything cc-health-check found in 15 minutes. Pay what you want.
+**[Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check)** — 6 hooks + 5 templates + 9 scripts + install.sh. Fix everything cc-health-check found in 15 minutes. Pay what you want ($0+).
 
 If cc-health-check helped you improve your setup, consider giving it a ⭐ — it helps others find this tool.
 

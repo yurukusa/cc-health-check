@@ -571,7 +571,7 @@ function printHuman(data) {
     }
     console.log('');
     console.log(`  ${c.cyan}Quick fix:${c.reset} ${c.bold}npx cc-safe-setup${c.reset}  ${c.dim}(8 safety hooks in 10 seconds)${c.reset}`);
-    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 358 hooks)${c.reset}`);
+    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 629+ hooks)${c.reset}`);
     console.log(`  ${c.cyan}Deep dive:${c.reset} ${c.dim}700+時間の自律稼働から生まれた実践ガイド${c.reset}`);
     console.log(`             ${c.dim}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
   } else {

@@ -83,7 +83,7 @@ npx cc-health-check
 
 **Quickest fix:** `npx cc-safe-setup` — 8 safety hooks in 10 seconds. Score jumps from ~30 to ~80.
 
-**Full fix:** [Claude Code Ops Kit](https://yurukusa.github.io/cc-ops-kit-landing/?utm_source=github&utm_medium=readme&utm_campaign=ops-kit&ref=health-check-low-score) — 6 hooks + 5 templates + 9 scripts. Pay what you want ($0+).
+**Deep dive:** [Hook Design Guide](https://zenn.dev/yurukusa/books/6076c23b1cb18b) — 14 chapters on hook design patterns, testing, and real incident postmortems from 700+ hours. Chapter 3 free.
 
 ---
 

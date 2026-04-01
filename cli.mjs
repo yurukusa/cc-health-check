@@ -558,6 +558,17 @@ function printHuman(data) {
   }
   console.log('');
 
+  // Dimension-to-chapter mapping (free chapters marked)
+  const chapterMap = {
+    'Safety Guards': { ch: '2-safety-guards', title: 'Safety Guards — 最初に直すべき4つのチェック', free: true },
+    'Code Quality': { ch: '3-code-quality', title: 'Code Quality — 構文エラーを自動で防ぐ', free: false },
+    'Monitoring': { ch: '4-monitoring', title: 'Monitoring — AIが何をしているかを知る', free: false },
+    'Recovery': { ch: '5-recovery', title: 'Recovery — 失敗から回復する仕組み', free: false },
+    'Autonomy': { ch: '6-autonomy', title: 'Autonomy — CCが自分で判断して動く仕組み', free: false },
+    'Coordination': { ch: '7-coordination', title: 'Coordination — 複数エージェントが協調する仕組み', free: false },
+  };
+  const BOOK_BASE = 'https://zenn.dev/yurukusa/books/6076c23b1cb18b';
+
   const failures = results.filter(r => !r.result.pass).sort((a, b) => b.w - a.w);
   if (failures.length > 0) {
     console.log(`  ${c.bold}Top fixes:${c.reset}`);
@@ -570,14 +581,30 @@ function printHuman(data) {
       }
     }
     console.log('');
+
+    // Show relevant book chapters for weak dimensions
+    const weakDims = Object.entries(dimTotals)
+      .filter(([cat]) => dimScores[cat] / dimTotals[cat] < 0.5)
+      .map(([cat]) => cat);
+
+    if (weakDims.length > 0) {
+      console.log(`  ${c.bold}Read how to fix your weak areas:${c.reset}`);
+      for (const dim of weakDims) {
+        const info = chapterMap[dim];
+        if (info) {
+          const freeTag = info.free ? ` ${c.green}(free)${c.reset}` : '';
+          console.log(`    ${c.cyan}📖${c.reset} ${info.title}${freeTag}`);
+          console.log(`       ${BOOK_BASE}/viewer/${info.ch}`);
+        }
+      }
+      console.log('');
+    }
+
     console.log(`  ${c.cyan}Quick fix:${c.reset} ${c.bold}npx cc-safe-setup${c.reset}  ${c.dim}(8 safety hooks in 10 seconds)${c.reset}`);
-    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 634+ hooks)${c.reset}`);
-    console.log(`  ${c.cyan}Deep dive:${c.reset} ${c.dim}700+時間の自律稼働から生まれた実践ガイド${c.reset}`);
-    console.log(`             ${c.dim}https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
+    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 650+ hooks)${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);
-    console.log(`  ${c.dim}Go deeper: 700+時間の自律稼働ガイド https://zenn.dev/yurukusa/books/6076c23b1cb18b${c.reset}`);
   }
 
   console.log('');

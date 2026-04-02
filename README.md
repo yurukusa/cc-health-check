@@ -83,7 +83,7 @@ npx cc-health-check
 
 **Quickest fix:** `npx cc-safe-setup` — 8 safety hooks in 10 seconds. Score jumps from ~30 to ~80.
 
-**Deep dive:** [Hook Design Guide](https://zenn.dev/yurukusa/books/6076c23b1cb18b) — 14 chapters on hook design patterns, testing, and real incident postmortems from 700+ hours. Chapter 3 free.
+**Deep dive:** [19→85 points: the full journey](https://zenn.dev/yurukusa/books/6076c23b1cb18b) — token consumption diagnosis, file loss prevention, and real incident postmortems from 700+ hours. Chapter 3 free.
 
 ---
 

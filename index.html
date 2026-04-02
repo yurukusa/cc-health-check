@@ -549,6 +549,10 @@ const T = {
     ctaTitle: 'Want to fix your score? The full guide is here.',
     ctaDesc: 'Token consumption diagnosis, file loss prevention, permission reduction (200→40/hr) — real fixes from 700+ hours of autonomous operation. Chapter 3 free.',
     ctaBtn: 'See the 19→85 journey',
+    ctaCriticalTitle: 'I scored 19 too. Here\u2019s how I got to 85.',
+    ctaCriticalDesc: 'I ran Claude Code at 19/100 for 700+ hours \u2014 lost files, burned tokens, broke production. This book is everything I learned fixing it. Chapter 3 free.',
+    ctaNeedsTitle: 'You\u2019ve started. The biggest risks are still open.',
+    ctaNeedsDesc: 'Token consumption spikes, file loss, permission fatigue \u2014 the fixes that closed these gaps are in the book. Chapter 3 free.',
     btnReset: 'Start Over',
     allClear: 'All clear! Your setup covers all 20 checks.',
     dimPrefix: 'Dimension',
@@ -625,6 +629,10 @@ const T = {
     ctaTitle: '\u30b9\u30b3\u30a2\u3092\u4e0a\u3052\u305f\u3044\uff1f\u5b9f\u8df5\u30ac\u30a4\u30c9\u304c\u3042\u308a\u307e\u3059\u3002',
     ctaDesc: '\u30c8\u30fc\u30af\u30f3\u6d88\u8cbb\u8a3a\u65ad\u3001\u30d5\u30a1\u30a4\u30eb\u6d88\u5931\u9632\u6b62\u3001\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u524a\u6e1b\uff08200\u219240\u56de/\u6642\uff09\u2014\u2014700+\u6642\u9593\u306e\u5b9f\u904b\u7528\u304b\u3089\u751f\u307e\u308c\u305f\u5b9f\u8df5\u4fee\u6b63\u3002\u7b2c3\u7ae0\u307e\u3067\u7121\u6599\u3002',
     ctaBtn: '19\u219285\u70b9\u306e\u5168\u5de5\u7a0b\u3092\u898b\u308b',
+    ctaCriticalTitle: '\u81ea\u5206\u308219\u70b9\u3067\u3057\u305f\u300285\u70b9\u307e\u3067\u306e\u5168\u8a18\u9332\u304c\u3042\u308a\u307e\u3059\u3002',
+    ctaCriticalDesc: '19\u70b9\u306e\u72b6\u614b\u3067700+\u6642\u9593\u8d70\u3089\u305b\u3066\u3001\u30d5\u30a1\u30a4\u30eb\u6d88\u5931\u3082\u30c8\u30fc\u30af\u30f3\u66b4\u8d70\u3082\u7d4c\u9a13\u3057\u307e\u3057\u305f\u3002\u305d\u306e\u5168\u3066\u3092\u76f4\u3057\u305f\u8a18\u9332\u3067\u3059\u3002\u7b2c3\u7ae0\u307e\u3067\u7121\u6599\u3002',
+    ctaNeedsTitle: '\u57fa\u672c\u306f\u3067\u304d\u3066\u3044\u307e\u3059\u3002\u3067\u3082\u91cd\u8981\u306a\u7a74\u304c\u6b8b\u3063\u3066\u3044\u307e\u3059\u3002',
+    ctaNeedsDesc: '\u30c8\u30fc\u30af\u30f3\u6d88\u8cbb\u306e\u6025\u5897\u3001\u30d5\u30a1\u30a4\u30eb\u6d88\u5931\u3001\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u75b2\u308c\u2014\u2014\u3053\u308c\u3089\u3092\u585e\u3044\u3060\u4fee\u6b63\u304c\u672c\u306b\u307e\u3068\u307e\u3063\u3066\u3044\u307e\u3059\u3002\u7b2c3\u7ae0\u307e\u3067\u7121\u6599\u3002',
     btnReset: '\u6700\u521d\u304b\u3089\u3084\u308a\u76f4\u3059',
     allClear: '\u5168\u9805\u76ee\u30af\u30ea\u30a2\uff0120\u9805\u76ee\u5168\u3066\u30ab\u30d0\u30fc\u3055\u308c\u3066\u3044\u307e\u3059\u3002',
     dimPrefix: '\u30c7\u30a3\u30e1\u30f3\u30b7\u30e7\u30f3',
@@ -925,6 +933,17 @@ function showResults() {
   if (recs.length === 0) {
     recList.innerHTML = `<li style="padding:12px; color:var(--safe); font-weight:700;">${t('allClear')}</li>`;
     document.getElementById('ctaCard').style.display = 'none';
+  } else {
+    // Score-dependent CTA messaging
+    const ctaTitleEl = document.getElementById('ctaTitle');
+    const ctaDescEl = document.getElementById('ctaDesc');
+    if (pct < 35) {
+      ctaTitleEl.textContent = t('ctaCriticalTitle') || t('ctaTitle');
+      ctaDescEl.textContent = t('ctaCriticalDesc') || t('ctaDesc');
+    } else if (pct < 60) {
+      ctaTitleEl.textContent = t('ctaNeedsTitle') || t('ctaTitle');
+      ctaDescEl.textContent = t('ctaNeedsDesc') || t('ctaDesc');
+    }
   }
 
   generateShareCard(pct, gradeText, dimScores, dimTotals);

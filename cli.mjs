@@ -568,6 +568,7 @@ function printHuman(data) {
     'Coordination': { ch: '7-coordination', title: 'Coordination — 複数エージェントが協調する仕組み', free: false },
   };
   const BOOK_BASE = 'https://zenn.dev/yurukusa/books/6076c23b1cb18b';
+  const TOKEN_BOOK = 'https://zenn.dev/yurukusa/books/token-savings-guide';
 
   const failures = results.filter(r => !r.result.pass).sort((a, b) => b.w - a.w);
   if (failures.length > 0) {
@@ -596,6 +597,10 @@ function printHuman(data) {
           console.log(`    ${c.cyan}📖${c.reset} ${info.title}${freeTag}`);
           console.log(`       ${BOOK_BASE}/viewer/${info.ch}`);
         }
+      }
+      if (weakDims.includes('Monitoring')) {
+        console.log(`    ${c.cyan}📖${c.reset} Token optimization — CLAUDE.mdの書き方でトークン消費が2-3倍変わる`);
+        console.log(`       ${TOKEN_BOOK}`);
       }
       console.log('');
     }

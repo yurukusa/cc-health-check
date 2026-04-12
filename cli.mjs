@@ -606,7 +606,7 @@ function printHuman(data) {
     }
 
     console.log(`  ${c.cyan}Quick fix:${c.reset} ${c.bold}npx cc-safe-setup${c.reset}  ${c.dim}(8 safety hooks in 10 seconds)${c.reset}`);
-    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 654 hooks)${c.reset}`);
+    console.log(`  ${c.cyan}All hooks:${c.reset} ${c.bold}npx cc-safe-setup --examples${c.reset}  ${c.dim}(browse 655 hooks)${c.reset}`);
   } else {
     console.log(`  ${c.green}${c.bold}All 20 checks passed! Your setup is production-ready.${c.reset}`);
     console.log(`\n  ${c.dim}Like this tool? ⭐ https://github.com/yurukusa/cc-health-check${c.reset}`);
